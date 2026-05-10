@@ -15,16 +15,15 @@ body {
 }
 
 .page-title {
-  font-size: 2rem;
-  color: #051fc2;
+  font-size: 3rem;
+  color: #32CD32;
   font-family: "Special Elite", system-ui;
   letter-spacing: 0.05em;
 }
 
 .inter {
   font-family: "Inter", sans-serif;
-  font-size: 1.6rem;
-  font-style: italic;
+  font-size: 2.6rem;
 }
 
 .content {
@@ -83,8 +82,8 @@ body {
 }
 
 .instructions {
-  font-size: 0.6rem;
-  color: #051fc2;
+  font-size: 1.6rem;
+  color: #000000;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-style: italic;
