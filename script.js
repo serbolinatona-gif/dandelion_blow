@@ -2,8 +2,8 @@ const video = document.getElementById("webcam");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const match = document.querySelector(".match");
-const cakeArea = document.querySelector(".cake-area");
-const cakeImg = document.querySelector(".cake");
+const flowerArea = document.querySelector(".flower-area");
+const flowerImg = document.querySelector(".flower");
 
 // Constants
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -19,8 +19,8 @@ canvas.height = WEBCAM_HEIGHT;
 let handPosition = { x: 0.5, y: 0.5 };
 let isHandDetected = false;
 
-let isCakeLit = false;
-let isCandlesBlownOut = false;
+let isFlowerWhite = false;
+let isFlowerBlown = false;
 
 const hands = new Hands({
   locateFile: (file) => {
@@ -56,7 +56,7 @@ hands.onResults((results) => {
 
     updateMatchPosition();
 
-    checkCandleLighting();
+    checkFlowerWhite();
   } else {
     isHandDetected = false;
   }
@@ -66,20 +66,20 @@ hands.onResults((results) => {
 function updateMatchPosition() {
   if (!isHandDetected) return;
 
-  const cakeRect = cakeArea.getBoundingClientRect();
+  const flowerRect = flowerArea.getBoundingClientRect();
 
   const padding = 20;
-  const matchX = padding + handPosition.x * (cakeRect.width - padding * 2 - 40);
+  const matchX = padding + handPosition.x * (flowerRect.width - padding * 2 - 40);
   const matchY =
-    padding + handPosition.y * (cakeRect.height - padding * 2 - 60);
+    padding + handPosition.y * (flowerRect.height - padding * 2 - 60);
 
   match.style.left = `${matchX}px`;
   match.style.top = `${matchY}px`;
 }
 
-// Light candles
-function checkCandleLighting() {
-  if (isCakeLit || isCandlesBlownOut) return;
+// Make flower white
+function checkFlowerWhite() {
+  if (isFlowerWhite || isFlowerBlown) return;
 
   const matchRect = match.getBoundingClientRect();
   const cakeRect = cakeImg.getBoundingClientRect();
@@ -87,31 +87,31 @@ function checkCandleLighting() {
   const matchTipX = matchRect.left + matchRect.width / 2;
   const matchTipY = matchRect.top;
 
-  const candleX = cakeRect.left + cakeRect.width / 2;
-  const candleY = cakeRect.top + 10;
+  const flowerX = flowerRect.left + flowerRect.width / 2;
+  const flowerY = flower.top + 10;
 
   const distance = Math.sqrt(
     Math.pow(matchTipX - candleX, 2) + Math.pow(matchTipY - candleY, 2)
   );
 
   if (distance < LIGHT_DISTANCE) {
-    lightCake();
+    whiteFlower();
   }
 }
 
-function lightCake() {
-  if (isCakeLit) return;
+function whiteFlower() {
+  if (isFlowerWhite) return;
 
-  isCakeLit = true;
-  cakeImg.src = "assets/cake_lit.gif";
+  isFlowerWhite = true;
+  flowerImg.src = "assets/dandelion_white.gif";
   match.style.display = "none";
 }
 
-function blowOutCandles() {
-  if (!isCakeLit || isCandlesBlownOut) return;
+function blownFlower() {
+  if (!isFlowerWhite || isFlowerBlown) return;
 
-  isCandlesBlownOut = true;
-  cakeImg.src = "assets/cake_unlit.gif";
+  isFlowerBlown = true;
+  flowerImg.src = "assets/dandelion_yellow.gif";
   createConfetti();
 }
 
@@ -203,8 +203,8 @@ function detectBlow() {
 
   const volume = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
 
-  if (volume > BLOW_THRESHOLD && isCakeLit && !isCandlesBlownOut) {
-    blowOutCandles();
+  if (volume > BLOW_THRESHOLD && isFlowerWhite && !isFlowerBlown) {
+    blownFlower();
   }
 
   requestAnimationFrame(detectBlow);
