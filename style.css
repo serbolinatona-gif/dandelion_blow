@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
 
 * {
   margin: 0;
@@ -17,7 +17,7 @@ body {
 .page-title {
   font-size: 2rem;
   color: #051fc2;
-  font-family: "Pixelify Sans", sans-serif;
+  font-family: "Special Elite", system-ui;
   letter-spacing: 0.05em;
 }
 
